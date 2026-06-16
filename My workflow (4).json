@@ -1,0 +1,907 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.message.text }}",
+        "options": {
+          "systemMessage": "Hello! 👋 I am your medical scan assistant.\n\nPlease type the type of scan you want to upload:\n\n1. X-ray  \n2. MRI  \n3. CT-scan\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        240,
+        -96
+      ],
+      "id": "9d448fea-27c6-4e57-b9f2-a36b4589428b",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        80,
+        80
+      ],
+      "id": "cd968da7-88ae-465c-9966-7110cfc46c23",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "ng8PxFlsIXDCUEwT",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "=https://docs.google.com/spreadsheets/d/1HglWoLESlCYsi9dju5pacQqtW-GwC2dIb1Djumr1x_A/edit?gid=1297874135#gid=1297874135\n",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Patients",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1HglWoLESlCYsi9dju5pacQqtW-GwC2dIb1Djumr1x_A/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            " Patient_ID": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('_Patient_ID', ``, 'string') }}",
+            "Name": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Name', ``, 'string') }}",
+            "Gender": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Gender', ``, 'string') }}",
+            "Contact ": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Contact_', ``, 'string') }}",
+            "Address": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Address', ``, 'string') }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": " Patient_ID",
+              "displayName": " Patient_ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Gender",
+              "displayName": "Gender",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Contact ",
+              "displayName": "Contact ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Address",
+              "displayName": "Address",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        288,
+        64
+      ],
+      "id": "c549127d-91cf-477f-af68-2e930085f3db",
+      "name": "Patients",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "juaWBB9Kb7uMdwf0",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1HglWoLESlCYsi9dju5pacQqtW-GwC2dIb1Djumr1x_A",
+          "mode": "list",
+          "cachedResultName": "Untitled spreadsheet",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1HglWoLESlCYsi9dju5pacQqtW-GwC2dIb1Djumr1x_A/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1253572476,
+          "mode": "list",
+          "cachedResultName": "Vaccination_Records",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1HglWoLESlCYsi9dju5pacQqtW-GwC2dIb1Djumr1x_A/edit#gid=1253572476"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Record_ID": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Record_ID', ``, 'string') }}",
+            "Patient_ID": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Patient_ID', ``, 'string') }}",
+            "Vaccine_Name": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Vaccine_Name', ``, 'string') }}",
+            "Dose_Number": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Dose_Number', ``, 'string') }}",
+            "Date_Given": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Date_Given', ``, 'string') }}",
+            "Next_Due_Date": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Next_Due_Date', ``, 'string') }}",
+            "Status ": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Status_', ``, 'string') }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Record_ID",
+              "displayName": "Record_ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Patient_ID",
+              "displayName": "Patient_ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Vaccine_Name",
+              "displayName": "Vaccine_Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Dose_Number",
+              "displayName": "Dose_Number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Date_Given",
+              "displayName": "Date_Given",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Next_Due_Date",
+              "displayName": "Next_Due_Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Status ",
+              "displayName": "Status ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        208,
+        80
+      ],
+      "id": "709c414a-4263-45c6-aa2e-31bfadbf91b1",
+      "name": "Vaccination_Records",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "juaWBB9Kb7uMdwf0",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1HglWoLESlCYsi9dju5pacQqtW-GwC2dIb1Djumr1x_A",
+          "mode": "list",
+          "cachedResultName": "Untitled spreadsheet",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1HglWoLESlCYsi9dju5pacQqtW-GwC2dIb1Djumr1x_A/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1297874135,
+          "mode": "list",
+          "cachedResultName": "Xray_Reports",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1HglWoLESlCYsi9dju5pacQqtW-GwC2dIb1Djumr1x_A/edit#gid=1297874135"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Report_ID": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Report_ID', ``, 'string') }}",
+            "Patient_ID ": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Patient_ID_', ``, 'string') }}",
+            "Image_File_Name ": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Image_File_Name_', ``, 'string') }}",
+            "Disease_Detected ": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Disease_Detected_', ``, 'string') }}",
+            "Severity_Score ": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Severity_Score_', ``, 'string') }}",
+            "Recommendation ": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Recommendation_', ``, 'string') }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Report_ID",
+              "displayName": "Report_ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Patient_ID ",
+              "displayName": "Patient_ID ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Image_File_Name ",
+              "displayName": "Image_File_Name ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Disease_Detected ",
+              "displayName": "Disease_Detected ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Severity_Score ",
+              "displayName": "Severity_Score ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Recommendation ",
+              "displayName": "Recommendation ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        432,
+        80
+      ],
+      "id": "dde68ac3-3758-49a1-b7b3-af57e96a0f0b",
+      "name": "Append row in sheet in Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "juaWBB9Kb7uMdwf0",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api-inference.huggingface.co/models/codewithdark/vit-chest-xray",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "=$json[\"image_base64\"]\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        608,
+        96
+      ],
+      "id": "8a453e21-0db7-48a1-82df-ba12e7d8740f",
+      "name": "HTTP Request",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "jffIqweiOGLnRIh7",
+          "name": "Bearer Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -752,
+        -80
+      ],
+      "id": "e6b645b8-4eea-4e9e-b799-c1c66d30efcc",
+      "name": "Telegram Trigger",
+      "webhookId": "e8c23e0a-d61e-4dc1-a125-8bc35794a805",
+      "credentials": {
+        "telegramApi": {
+          "id": "cJsZXeczIYi9hvc3",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "={{ $json.output }}",
+        "additionalFields": {
+          "parse_mode": "HTML"
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        752,
+        -96
+      ],
+      "id": "fa55baac-df1d-4760-aa0a-23b6853d1c81",
+      "name": "Send a text message",
+      "webhookId": "9d7aa8f1-e1d0-467b-b716-0ec771eceeef",
+      "credentials": {
+        "telegramApi": {
+          "id": "cJsZXeczIYi9hvc3",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "7ff57fc3-fb6f-4a56-8876-169396af7714",
+              "leftValue": "={{$json[\"message\"][\"text\"]}}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -208,
+        -80
+      ],
+      "id": "ba5973f1-f21e-4236-ae0d-2ebbcc0e4fbb",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "url": "=https://api.telegram.org/bot{{$vars.botToken}}/getFile?file_id={{$json[\"message\"][\"photo\"][$json[\"message\"][\"photo\"].length - 1][\"file_id\"]}}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -480,
+        -256
+      ],
+      "id": "da35932d-8805-4a50-883b-d4431620629c",
+      "name": "HTTP Request1"
+    },
+    {
+      "parameters": {
+        "url": "=https://api.telegram.org/file/bot{{$vars.botToken}}/{{$json[\"result\"][\"file_path\"]}}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -208,
+        -256
+      ],
+      "id": "5ba821e6-930c-4b20-996e-ac9e8c03d042",
+      "name": "Download Image"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api-inference.huggingface.co/models/codewithdark/vit-chest-xray",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "contentType": "binaryData",
+        "inputDataFieldName": "data",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        80,
+        -320
+      ],
+      "id": "fc9254ff-6bac-4eb4-886a-5963ae6ab55f",
+      "name": "post_image",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "jffIqweiOGLnRIh7",
+          "name": "Bearer Auth account"
+        },
+        "httpHeaderAuth": {
+          "id": "ReSG6fUXpAHFEKQE",
+          "name": "Header Auth account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Mapping model labels to diseases\nconst labelColumns = ['Cardiomegaly', 'Edema', 'Consolidation', 'Pneumonia', 'No Finding'];\n\n// Hugging Face response (ensure array of predictions)\nlet results = items[0].json; // e.g., [{label: \"LABEL_2\", score: 0.2925}]\nif (!Array.isArray(results)) {\n  results = [results];\n}\n\n// Convert labels and calculate severity\nconst severityResults = results.map(disease => {\n  const index = parseInt(disease.label.split('_')[1]);\n  const humanLabel = labelColumns[index] || disease.label;\n  const severityScore = (disease.score * 100).toFixed(1); // 0-100 scale\n\n  return {\n    label: humanLabel,\n    probability: disease.score,\n    severity_score: severityScore\n  };\n});\n\n// Prepare human-readable message for Telegram\nconst messageText = severityResults.map(d => `${d.label}: ${d.severity_score}%`).join('\\n');\n\nreturn [\n  {\n    json: {\n      severity: severityResults,\n      telegramMessage: messageText\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        336,
+        -320
+      ],
+      "id": "e69f83a7-675c-480c-9aec-0f02cfadf400",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.telegramMessage }}",
+        "options": {
+          "systemMessage": "You are a medical assistant AI specialized in radiology reports.\nYou receive structured data from a model, including:\n\ndisease (string)\n\nseverity_score (0–100)\n\nprobability (0–1)\n\nYour task:\n\nInterpret the severity_score and provide actionable recommendations.\n\nUse these rules for severity interpretation:\n\nHigh severity (≥70): Urgent. Advise consulting a doctor immediately.\n\nModerate severity (40–69): Monitor symptoms and consider consulting a doctor.\n\nMild severity (1–39): Stay healthy, observe changes, and maintain lifestyle habits.\n\nNo severity (0): Routine health check is sufficient.\n\nProvide additional helpful advice:\n\nCause of the disease\n\nWhat to avoid (pollen, allergens, hot/cold water, dust, smoking, strenuous activity)\n\nSuggested healthy practices (hydration, rest, diet, lifestyle habits)\n\nMake the recommendations around 40 words.\n\nReply concise, user-friendly, and return in JSON format with these fields:\nexample->\n{\n  \"disease\": \"<disease name>\",\n  \"severity_score\": <severity_score>,\n  \"probability\": <probability>,\n  \"cause\": \"<primary cause(s) of the disease>\",\n  \"recommendations\": \"<~40-word actionable advice including cause, precautions, and lifestyle suggestions>\"\n}\n\n\nAlways respond only based on the input provided."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        592,
+        -416
+      ],
+      "id": "1810b0dc-137a-417b-81af-e90d2c130011",
+      "name": "AI Agent1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        544,
+        -272
+      ],
+      "id": "68c07cb1-fc37-41be-8699-a373ba5852f7",
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "ng8PxFlsIXDCUEwT",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "let raw = $json.output;\n\n// Clean code fences if present\nraw = raw.replace(/```json\\n?/, \"\").replace(/```$/, \"\").trim();\n\nlet data;\ntry {\n  data = JSON.parse(raw);\n  data['user_id'] = $('Telegram Trigger').first().json.message.from.id;\n\n  data['timestamp'] = new Date().toISOString() ;\n} catch (err) {\n  throw new Error(\"AI Agent did not return valid JSON: \" + raw);\n}\n\nreturn [{ json: data }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1120,
+        -96
+      ],
+      "id": "a0a38cad-2929-47b0-8a84-5085960059df",
+      "name": "Code in JavaScript1"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Telegram Trigger').item.json.message.text }}",
+        "contextWindowLength": "=5"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        400,
+        288
+      ],
+      "id": "6f732eeb-8e92-4f5d-9738-f234b4ebdc51",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.pdfshift.io/v3/convert/pdf",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "source"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Convert to PDF",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1600,
+        -304
+      ],
+      "id": "707d18bb-fabb-4956-9051-a0fed15a709a",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "0ZXiir8k65UB87M8",
+          "name": "Unnamed credential 4"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const data = items[0].json;\n\nlet html = `\n<html>\n<head>\n  <style>\n    body {\n      font-family: \"Times New Roman\", Times, serif;\n      padding: 30px;\n      line-height: 1.5;\n      color: #000;\n    }\n    h1 {\n      text-align: center;\n      font-weight: bold;\n      font-size: 24px;\n      text-transform: uppercase;\n      margin-bottom: 40px;\n    }\n    h2 {\n      margin-top: 20px;\n      color: #333;\n      font-size: 16px;\n      font-weight: bold;\n    }\n    p {\n      margin-bottom: 10px;\n      font-size: 14px;\n    }\n  </style>\n</head>\n<body>\n  <h1>Medicare X-ray Report</h1>\n`;\n\nfor (const [key, value] of Object.entries(data)) {\n  html += `<h2>${key.charAt(0).toUpperCase() + key.slice(1)}</h2>`;\n  html += `<p>${value}</p>`;\n}\n\nhtml += `</body></html>`;\n\nreturn [{ json: { html_content: html } }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1312,
+        -352
+      ],
+      "id": "368ce439-fb5b-4b1d-82de-81af047d4468",
+      "name": "Code in JavaScript2"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').all()[0].json.message.chat.id }}",
+        "text": "={{ $json.output }}",
+        "additionalFields": {
+          "parse_mode": "HTML"
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        992,
+        -432
+      ],
+      "id": "00c17f95-7ee4-43a4-b5b5-5154f52152cf",
+      "name": "Send a text message1",
+      "webhookId": "9d7aa8f1-e1d0-467b-b716-0ec771eceeef",
+      "credentials": {
+        "telegramApi": {
+          "id": "cJsZXeczIYi9hvc3",
+          "name": "Telegram account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Patients": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Vaccination_Records": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet in Google Sheets": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "Download Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download Image": {
+      "main": [
+        [
+          {
+            "node": "post_image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "post_image": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a text message": {
+      "main": [
+        []
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent1": {
+      "main": [
+        [
+          {
+            "node": "Send a text message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript2": {
+      "main": [
+        [
+          {
+            "node": "Convert to PDF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "1b137892-89ff-4a6d-b635-eb4a83beaf8f",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "4978356629fd586643d78a44b93651db3598e55def2aed1fd9524c049bbca54c"
+  },
+  "id": "tU4QCvpMOput95mk",
+  "tags": []
+}
