@@ -1,8 +1,5 @@
 # 🏥 MEDICARE — AI-Driven Public Health Chatbot for Disease Awareness
 
-> **Bharatiya Antariksh Hackathon 2026** | Team MEDICARE | NIT Kurukshetra
-
-[![Hackathon](https://img.shields.io/badge/Bharatiya%20Antariksh%20Hackathon-2026-orange?style=for-the-badge)](https://www.youtube.com/watch?v=QaTRw4GxyUY)
 [![Platform](https://img.shields.io/badge/Platform-WhatsApp%20%7C%20SMS%20%7C%20Voice-25D366?style=for-the-badge&logo=whatsapp)](https://www.youtube.com/watch?v=QaTRw4GxyUY)
 [![Workflow](https://img.shields.io/badge/Built%20With-n8n-EA4B71?style=for-the-badge&logo=n8n)](https://n8n.io)
 [![AI](https://img.shields.io/badge/AI-Google%20Gemini-4285F4?style=for-the-badge&logo=google)](https://ai.google.dev)
@@ -265,29 +262,7 @@ Bot  → ✅ YOU ARE ELIGIBLE FOR:
 
 ---
 
-## 👥 Team
 
-| Name | Role | Institution |
-|------|------|-------------|
-| **Devanshu Jain** | Team Leader | NIT Kurukshetra |
-| **Harshit Mishra** | Member | NIT Kurukshetra |
-| **Garv Sharma** | Member | NIT Kurukshetra |
-| **Ashish Badal** | Member | NIT Kurukshetra |
-
----
-
-## 🙏 Acknowledgements
-
-- **ISRO & Hack2Skill** — Bharatiya Antariksh Hackathon 2026
-- **Google** — Gemini API, Dialogflow, and Speech-to-Text
-- **n8n** — open-source workflow automation that made this possible
-- **ASHA & Anganwadi Workers** — the frontline heroes this is built to empower
-
----
-
-## 📄 License
-
-MIT License — see [LICENSE](LICENSE) for details.
 
 ---
 
