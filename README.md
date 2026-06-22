@@ -197,6 +197,14 @@ medicare/
 ├── outbreak.gif                  ← outbreak prediction & surveillance simulation
 ├── multilingual.gif              ← regional language support (Odia) simulation
 ├── govtschemes.gif               ← eligible government schemes finder simulation
+├── images/                       ← folder containing original screenshots
+│   ├── ai_xray_analysis.png
+│   ├── malnutrition_screening.png
+│   ├── medicare_business_profile.png
+│   ├── multilingual_support_odia.png
+│   ├── scheme_finder_eligibility.png
+│   ├── vaccination_scheduling.png
+│   └── whatsapp_welcome_chat.png
 └── README.md
 ```
 
