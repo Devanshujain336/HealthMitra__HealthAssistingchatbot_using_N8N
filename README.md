@@ -14,6 +14,14 @@
 
 **[▶ Watch the full demo on YouTube](https://www.youtube.com/watch?v=QaTRw4GxyUY)**
 
+### 📱 User Interface Preview
+
+<p align="center">
+  <img src="whatsapp_welcome_chat.png" width="320" alt="Welcome Chat" />
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="medicare_business_profile.png" width="320" alt="Medicare Business Profile" />
+</p>
+
 ---
 
 ## 🚨 The Problem
@@ -42,26 +50,53 @@ The entire system lives in **a single n8n workflow JSON file**. Import it, fill 
 ## ✨ What It Does
 
 ### 💉 Smart Vaccination Reminders
+
+<p align="center">
+  <img src="vaccination_scheduling.png" width="320" alt="Vaccination Scheduling" />
+</p>
+
 Age-based schedule auto-generated from the Government RCH Portal. Reminders sent via WhatsApp/SMS in the user's local language, with automatic appointment booking at the nearest PHC.
 
 ### 🩻 AI X-Ray Analysis
+
+<p align="center">
+  <img src="ai_xray_analysis.png" width="320" alt="AI X-Ray Analysis" />
+</p>
+
 User sends a chest X-ray photo over WhatsApp → Gemini AI analyses it in ~30 seconds → diagnosis and nearest specialist referral sent back.
 
 ### 🥗 Malnutrition Detection
+
+<p align="center">
+  <img src="malnutrition_screening.png" width="320" alt="Malnutrition Screening" />
+</p>
+
 ASHA workers enter a child's age, weight, and height → SAM/MAM risk instantly flagged using WHO z-score standards → protocol PDF + alert dispatched to the Anganwadi worker.
 
 ### 🦠 Outbreak Prediction & Surveillance
 Community-reported symptoms aggregated in real-time. Government IDSP alert triggered when **> 10 similar cases** are reported within 2 km. Detection time drops from **21 days → under 48 hours**.
 
 ### 🎙️ Voice Interface — 12+ Indian Languages
+
+<p align="center">
+  <img src="multilingual_support_odia.png" width="320" alt="Multilingual Support" />
+</p>
+
 Full IVR + Google Speech-to-Text for zero-literacy users. Supports Hindi, Tamil, Telugu, Bengali, Kannada, Marathi + dialects. Designed to reach **287 million** non-literate users.
 
 ### 🏛️ Government Scheme Finder
+
+<p align="center">
+  <img src="scheme_finder_eligibility.png" width="320" alt="Government Scheme Finder" />
+</p>
+
 Connects to **15+ databases** and **500+ central/state schemes**. Filters by income, caste, state, and age. Includes Ayushman Bharat lookup + Jan Aushadhi pharmacy locator.
 
 ---
 
 ## 🔁 How the n8n Workflow Works
+
+![n8n Workflow Screenshot](n8n_workflow.png)
 
 ```
 User sends a message on WhatsApp / SMS / Voice
@@ -157,7 +192,15 @@ That's it. The bot is live.
 
 ```
 medicare/
-├── MEDICARE_workflow.json    ← the entire system, import this into n8n
+├── MEDICARE_workflow.json        ← the entire system, import this into n8n
+├── n8n_workflow.png              ← workflow visualization screenshot
+├── whatsapp_welcome_chat.png      ← chat onboarding/welcome screenshot
+├── medicare_business_profile.png  ← whatsapp business profile screenshot
+├── multilingual_support_odia.png  ← regional language support (Odia)
+├── ai_xray_analysis.png          ← chest x-ray machine learning analysis
+├── vaccination_scheduling.png    ← vaccination schedule flow entry
+├── malnutrition_screening.png    ← SAM/MAM malnutrition growth analysis
+├── scheme_finder_eligibility.png ← eligible government health schemes finder
 └── README.md
 ```
 
