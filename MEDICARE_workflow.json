@@ -356,7 +356,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api-inference.huggingface.co/models/codewithdark/vit-chest-xray",
+        "url": "https://router.huggingface.co/hf-inference/models/codewithdark/vit-chest-xray",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendHeaders": true,
@@ -512,7 +512,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api-inference.huggingface.co/models/codewithdark/vit-chest-xray",
+        "url": "https://router.huggingface.co/hf-inference/models/codewithdark/vit-chest-xray",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
@@ -610,7 +610,7 @@
     {
       "parameters": {
         "sessionIdType": "customKey",
-        "sessionKey": "={{ $('Telegram Trigger').item.json.message.text }}",
+        "sessionKey": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
         "contextWindowLength": "=5"
       },
       "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
@@ -689,6 +689,125 @@
           "name": "Telegram account"
         }
       }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "7ff57fc3-fb6f-4a56-8876-169396af7714",
+              "leftValue": "={{$json[\"message\"][\"photo\"]}}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -32,
+        -160
+      ],
+      "id": "ef7f16a0-974a-4d22-b9b3-4f24c0ebac62",
+      "name": "If Photo?"
+    },
+    {
+      "parameters": {
+        "url": "=https://api.telegram.org/bot{{$vars.botToken}}/getFile?file_id={{$json[\"message\"][\"voice\"][\"file_id\"]}}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        80,
+        -560
+      ],
+      "id": "9a05b38d-8a2b-42ef-bd8f-074900a6e3d2",
+      "name": "Get Voice Path"
+    },
+    {
+      "parameters": {
+        "url": "=https://api.telegram.org/file/bot{{$vars.botToken}}/{{$json[\"result\"][\"file_path\"]}}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        280,
+        -560
+      ],
+      "id": "56cb3c82-ffcf-4e58-8547-2c97486e9e42",
+      "name": "Download Voice"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://router.huggingface.co/hf-inference/models/openai/whisper-large-v3",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "contentType": "binaryData",
+        "inputDataFieldName": "data",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        480,
+        -560
+      ],
+      "id": "313d4b8e-e24c-473d-8153-f7cc8c3b7a58",
+      "name": "post_voice",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "ReSG6fUXpAHFEKQE",
+          "name": "Header Auth account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "return [{\n  json: {\n    message: {\n      text: items[0].json.text\n    }\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        680,
+        -560
+      ],
+      "id": "f8b6540c-1db2-488f-9a03-7cb6df8555e7",
+      "name": "Format Voice Fields"
     }
   ],
   "pinData": {},
@@ -781,7 +900,7 @@
         ],
         [
           {
-            "node": "HTTP Request1",
+            "node": "If Photo?",
             "type": "main",
             "index": 0
           }
@@ -886,6 +1005,68 @@
         [
           {
             "node": "Convert to PDF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Photo?": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get Voice Path",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Voice Path": {
+      "main": [
+        [
+          {
+            "node": "Download Voice",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download Voice": {
+      "main": [
+        [
+          {
+            "node": "post_voice",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "post_voice": {
+      "main": [
+        [
+          {
+            "node": "Format Voice Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Voice Fields": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
             "type": "main",
             "index": 0
           }
