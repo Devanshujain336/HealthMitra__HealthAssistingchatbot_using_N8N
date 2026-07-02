@@ -127,6 +127,16 @@ Every box above is a set of connected nodes inside the single workflow file. No 
 
 ---
 
+## 📱 Chatbot Screen Demo
+
+Here is a live screen recording demonstrating how **HealthMitra** works on WhatsApp, including regional language support, voice transcription, and image analysis:
+
+<p align="center">
+  <video src="https://github.com/Devanshujain336/HealthMitra__HealthAssistingchatbot_using_N8N/raw/main/screendemo.mp4" width="100%" controls alt="HealthMitra WhatsApp Chatbot Screen Demo"></video>
+</p>
+
+---
+
 ## 🚀 Getting Started
 
 ### Prerequisites
