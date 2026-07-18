@@ -17,16 +17,16 @@
 
 Rural India faces a compounding healthcare crisis across access, prevention, detection and digital literacy.
 
+
 | Metric | Reality |
 |--------|---------|
-| 👶 Child Mortality | **38,000 / yr** from vaccine-preventable diseases |
-| 🏥 Doctor-Patient Ratio | **1 : 11,082** vs WHO norm of 1:1,000 |
-| 💉 Vaccination Crisis | **67%** of rural children miss critical vaccinations |
-| 🍽️ Malnutrition | **35.7%** of children suffer from stunting nationwide |
-| ⏱️ Outbreak Detection | **21+ days** to detect a disease outbreak |
-| 📱 Digital Divide | **< 15%** of rural population reached by existing health apps |
+| 💉 Immunization Gap | **1 in 8 Indian children** still misses full immunization, leaving them vulnerable to preventable diseases. |
+| ⏰ Missed Vaccine Doses | Lack of timely reminders and follow-ups causes **thousands of children** to miss critical vaccination windows every year. |
+| 👩‍⚕️ Overburdened Health Workers | ASHA and Anganwadi workers manually manage **hundreds of children**, making tracking and follow-ups challenging. |
+| 📄 Paper-Based Tracking | Manual registers increase the risk of **missed vaccinations, duplicate records, and delayed interventions.** |
+| 🌾 Rural Healthcare Challenges | Limited awareness, transportation, and digital accessibility continue to hinder timely child healthcare. |
+| 📱 Need for Smart Digital Support | Rural communities require **AI-powered, multilingual, offline-first** solutions for vaccination scheduling and health monitoring. |
 
----
 
 ## 💡 The Solution
 
